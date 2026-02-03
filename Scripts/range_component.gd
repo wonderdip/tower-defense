@@ -8,6 +8,7 @@ signal out_range(area: Area2D)
 @export var radius: float:
 	set(value):
 		radius = value
+		print("range changed")
 		_on_radius_changed()
 		
 enum UnitType { TOWER, ENEMY }

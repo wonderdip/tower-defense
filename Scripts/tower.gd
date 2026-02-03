@@ -1,8 +1,10 @@
 extends Node2D
 class_name Tower
 
-@onready var drag_component: Node = $DragComponent
+@export var tower_name: String = ""
+@export var cost: int
 
+@onready var drag_component: Node = $DragComponent
 var placed: bool
 
 func _input(event: InputEvent) -> void:
