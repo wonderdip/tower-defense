@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccbghg4upj1re"]
+
+[ext_resource type="Script" uid="uid://rul80q2c4dc7" path="res://Scripts/range_component.gd" id="1_ox5gh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p6wkb"]
+resource_local_to_scene = true
+radius = 20.0
+
+[node name="RangeComponent" type="Area2D"]
+script = ExtResource("1_ox5gh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p6wkb")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkcdj5uhwwq6f"]
+
+[ext_resource type="PackedScene" uid="uid://d08bgrjgdp3yg" path="res://Scenes/enemy.tscn" id="2_xfk5q"]
+
+[sub_resource type="Curve2D" id="Curve2D_8ffim"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 24, 112, 0, 0, 0, 0, 49, 159, 0, 0, 0, 0, 88, 198, 0, 0, 0, 0, 134, 204, 0, 0, 0, 0, 200, 192, 0, 0, 0, 0, 224, 136, 0, 0, 0, 0, 264, 80, 0, 0, 0, 0, 304, 64, 0, 0, 0, 0, 344, 85, 0, 0, 0, 0, 357, 120, 0, 0, 0, 0, 362, 170, 0, 0, 0, 0, 386, 207, 0, 0, 0, 0, 450, 210, 0, 0, 0, 0, 486, 182, 0, 0, 0, 0, 505, 151, 0, 0, 0, 0, 554, 136, 0, 0, 0, 0, 581, 153, 0, 0, 0, 0, 611, 177, 0, 0, 0, 0, 639, 179)
+}
+point_count = 20
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfk5q"]
+size = Vector2(69, 98)
+
+[node name="Level1" type="Node2D"]
+
+[node name="LevelPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_8ffim")
+
+[node name="Enemy" parent="LevelPath" node_paths=PackedStringArray("path") instance=ExtResource("2_xfk5q")]
+position = Vector2(0, 56)
+path = NodePath("..")
+
+[node name="FinishLine" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
+position = Vector2(674.5, 176)
+shape = SubResource("RectangleShape2D_xfk5q")

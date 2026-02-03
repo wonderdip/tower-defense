@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://br3a3v20jekxv"]
+
+[ext_resource type="Script" uid="uid://c0jioo225u8ho" path="res://Scripts/tower.gd" id="1_ndpwd"]
+[ext_resource type="PackedScene" uid="uid://cffw0xosd5blx" path="res://Scenes/drag_component.tscn" id="2_mh5eo"]
+[ext_resource type="PackedScene" uid="uid://5ottdje5cq8n" path="res://Scenes/attack_component.tscn" id="3_ou3m2"]
+[ext_resource type="Texture2D" uid="uid://b8gkkrqawyomq" path="res://icon.svg" id="3_tghyl"]
+[ext_resource type="PackedScene" uid="uid://ccbghg4upj1re" path="res://Scenes/range_component.tscn" id="4_81kva"]
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_ndpwd")
+
+[node name="DragComponent" parent="." node_paths=PackedStringArray("parent_node") instance=ExtResource("2_mh5eo")]
+parent_node = NodePath("..")
+
+[node name="AttackComponent" parent="." instance=ExtResource("3_ou3m2")]
+damage = 0.0
+atk_speed = 0.0
+
+[node name="RangeComponent" parent="AttackComponent" instance=ExtResource("4_81kva")]
+radius = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_tghyl")
