@@ -1,21 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cseay7m6hfjyn"]
+[gd_scene load_steps=2 format=3 uid="uid://cseay7m6hfjyn"]
 
 [ext_resource type="Script" uid="uid://b2kjtmqyi2r05" path="res://Scripts/shop_item.gd" id="1_b8rhe"]
-[ext_resource type="Texture2D" uid="uid://b8gkkrqawyomq" path="res://icon.svg" id="1_wmysf"]
 
 [node name="ShopItem" type="VBoxContainer"]
+theme_override_constants/separation = 0
 script = ExtResource("1_b8rhe")
 
 [node name="ItemTexture" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("1_wmysf")
 expand_mode = 1
 
 [node name="BuyButton" type="Button" parent="."]
-custom_minimum_size = Vector2(48, 24)
+custom_minimum_size = Vector2(32, 20)
 layout_mode = 2
-text = "$0"
+theme_override_font_sizes/font_size = 9
+text = "$200"
 
 [connection signal="button_down" from="BuyButton" to="." method="_on_buy_button_button_down"]
 [connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

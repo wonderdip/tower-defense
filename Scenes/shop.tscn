@@ -8,42 +8,50 @@
 [node name="Shop" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 520.0
-offset_right = 520.0
+offset_left = 408.0
+offset_right = 408.0
 
-[node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(96, 360)
-layout_mode = 0
-offset_right = 120.0
-offset_bottom = 360.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-custom_minimum_size = Vector2(104, 344)
+[node name="Panel" type="PanelContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(72, 288)
+offset_left = 436.0
+offset_right = 512.0
+offset_bottom = 288.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+custom_minimum_size = Vector2(68, 280)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 9
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "Shop"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Row" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 248)
 layout_mode = 2
-theme_override_constants/separation = 8
+horizontal_scroll_mode = 0
 
-[node name="Basic" parent="Panel/VBoxContainer/Row" instance=ExtResource("1_a0mxf")]
+[node name="Row" type="HBoxContainer" parent="CanvasLayer/Panel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Basic" parent="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row" instance=ExtResource("1_a0mxf")]
 layout_mode = 2
 tower = ExtResource("2_2shtd")
 
-[node name="Ranger" parent="Panel/VBoxContainer/Row" instance=ExtResource("1_a0mxf")]
+[node name="Ranger" parent="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row" instance=ExtResource("1_a0mxf")]
 layout_mode = 2
 tower = ExtResource("3_io27d")
 
 [node name="Level1" parent="." instance=ExtResource("4_fdj0q")]
-position = Vector2(-520, 0)
+position = Vector2(-408, 0)
 
-[connection signal="mouse_entered" from="Panel" to="Panel/VBoxContainer/Row/Basic" method="_on_panel_mouse_entered"]
-[connection signal="mouse_exited" from="Panel" to="Panel/VBoxContainer/Row/Basic" method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Panel" to="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row/Basic" method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Panel" to="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row/Basic" method="_on_panel_mouse_exited"]
