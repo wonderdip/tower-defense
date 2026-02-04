@@ -4,7 +4,7 @@ class_name AttackComponent
 @export var damage: float
 @export var atk_speed: float
 
-@export var parent_node: Node2D
+@export var parent_node: Tower
 @export var range_component: RangeComponent
 
 @onready var attack_timer: Timer = $AttackTimer
@@ -37,18 +37,19 @@ func attack():
 	if target == null:
 		return
 	print("Attacking", target.name)
-	parent_node.modulate = Color.AQUA
+	parent_node.modulate = Color.RED
 
 	# Try to find a HealthComponent on the target
 	var health = target.health_component as HealthComponent
 	if health:
 		health.take_damage(damage)
-
+	
 	can_attack = false
 	attack_timer.start(atk_speed)
-
-
+	await get_tree().create_timer(0.1, true, false, false).timeout
+	parent_node.modulate = Color.WHITE
+	
 func _on_attack_timer_timeout():
-	parent_node.modulate = Color.GREEN
+	parent_node.modulate = Color.WHITE
 	can_attack = true
 	try_attack() # only attack again if still in range

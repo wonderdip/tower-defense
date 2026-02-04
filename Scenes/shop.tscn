@@ -1,25 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bepicjim4atkj"]
+[gd_scene load_steps=5 format=3 uid="uid://bepicjim4atkj"]
 
 [ext_resource type="PackedScene" uid="uid://cseay7m6hfjyn" path="res://Scenes/shop_item.tscn" id="1_a0mxf"]
-[ext_resource type="PackedScene" uid="uid://br3a3v20jekxv" path="res://Scenes/tower.tscn" id="2_2shtd"]
+[ext_resource type="PackedScene" uid="uid://br3a3v20jekxv" path="res://Scenes/Towers/basic.tscn" id="2_2shtd"]
+[ext_resource type="PackedScene" uid="uid://bor3fccmjyba8" path="res://Scenes/Towers/ranger.tscn" id="3_io27d"]
+[ext_resource type="PackedScene" uid="uid://dkcdj5uhwwq6f" path="res://Scenes/level_1.tscn" id="4_fdj0q"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 496.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_left = 520.0
+offset_right = 520.0
 
 [node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(144, 360)
+custom_minimum_size = Vector2(96, 360)
 layout_mode = 0
-offset_right = 144.0
+offset_right = 120.0
 offset_bottom = 360.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-custom_minimum_size = Vector2(128, 344)
+custom_minimum_size = Vector2(104, 344)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -33,7 +32,18 @@ vertical_alignment = 1
 
 [node name="Row" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="ShopItem" parent="Panel/VBoxContainer/Row" instance=ExtResource("1_a0mxf")]
+[node name="Basic" parent="Panel/VBoxContainer/Row" instance=ExtResource("1_a0mxf")]
 layout_mode = 2
 tower = ExtResource("2_2shtd")
+
+[node name="Ranger" parent="Panel/VBoxContainer/Row" instance=ExtResource("1_a0mxf")]
+layout_mode = 2
+tower = ExtResource("3_io27d")
+
+[node name="Level1" parent="." instance=ExtResource("4_fdj0q")]
+position = Vector2(-520, 0)
+
+[connection signal="mouse_entered" from="Panel" to="Panel/VBoxContainer/Row/Basic" method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="Panel/VBoxContainer/Row/Basic" method="_on_panel_mouse_exited"]

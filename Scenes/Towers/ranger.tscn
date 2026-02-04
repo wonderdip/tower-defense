@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bor3fccmjyba8"]
+
+[ext_resource type="Script" uid="uid://c0jioo225u8ho" path="res://Scripts/tower.gd" id="1_csjfd"]
+[ext_resource type="PackedScene" uid="uid://cffw0xosd5blx" path="res://Scenes/drag_component.tscn" id="2_tj53t"]
+[ext_resource type="PackedScene" uid="uid://5ottdje5cq8n" path="res://Scenes/attack_component.tscn" id="3_1rked"]
+[ext_resource type="PackedScene" uid="uid://ccbghg4upj1re" path="res://Scenes/range_component.tscn" id="4_gki7q"]
+[ext_resource type="Texture2D" uid="uid://baviy2r0r3yt2" path="res://Assets/ShopSprites/Cat2.png" id="5_csjfd"]
+
+[node name="Ranger" type="Node2D"]
+script = ExtResource("1_csjfd")
+tower_name = "Ranger"
+cost = 250
+metadata/_custom_type_script = "uid://c0jioo225u8ho"
+
+[node name="DragComponent" parent="." node_paths=PackedStringArray("parent_node") instance=ExtResource("2_tj53t")]
+parent_node = NodePath("..")
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("parent_node", "range_component") instance=ExtResource("3_1rked")]
+damage = 5.0
+atk_speed = 0.8
+parent_node = NodePath("..")
+range_component = NodePath("RangeComponent")
+
+[node name="RangeComponent" parent="AttackComponent" instance=ExtResource("4_gki7q")]
+radius = 200.0
+
+[node name="ShopSprite" type="Sprite2D" parent="."]
+texture = ExtResource("5_csjfd")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)

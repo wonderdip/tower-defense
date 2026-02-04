@@ -16,8 +16,9 @@ collision_mask = 8
 radius = 20.0
 type = 1
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_287tu")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_287tu")]
 max_health = 30.0
+sprite = NodePath("../Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3.8146973e-06, -3.8146973e-06)

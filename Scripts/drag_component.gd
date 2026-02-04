@@ -1,7 +1,7 @@
 extends Node2D
 class_name DragComponent
 
-@export var parent_node: Node2D
+@export var parent_node: Tower
 var drag: bool
 
 func start_drag():
@@ -9,7 +9,6 @@ func start_drag():
 		return
 		
 	drag = true
-
 
 func end_drag():
 	if parent_node == null:
