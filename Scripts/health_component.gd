@@ -19,7 +19,8 @@ func take_damage(amount: float):
 	
 	if current_health <= 0:
 		current_health = 0
-		emit_signal("died")
+		died.emit()
+		
 	await get_tree().create_timer(0.3, true, false, false).timeout
 	is_taking_damage = false
 	sprite.modulate = Color.WHITE

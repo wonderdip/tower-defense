@@ -15,7 +15,7 @@ expand_mode = 1
 custom_minimum_size = Vector2(32, 20)
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
-text = "$200"
+text = "$0"
 
 [connection signal="button_down" from="BuyButton" to="." method="_on_buy_button_button_down"]
 [connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

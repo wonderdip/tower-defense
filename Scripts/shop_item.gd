@@ -9,9 +9,9 @@ class_name ShoptItem
 			_on_tower_changed()
 			
 @export var level: Node2D
-
 @onready var item_texture: TextureRect = $ItemTexture
 @onready var buy_button: Button = $BuyButton
+@onready var money: Money = $"../../../../../PanelContainer/HBoxContainer/Money"
 
 var can_spawn: bool = false
 var added_tower: Tower
@@ -70,17 +70,20 @@ func _input(event: InputEvent) -> void:
 			# Cancel - mouse released over panel
 			remove_tower()
 		else:
-			if is_on_grass():
+			if is_on_grass() and money.can_buy(added_tower.cost):
 				# Confirm placement
 				added_tower.drag_component.end_drag()
 				added_tower.placed = true
+				money.subtract_money(added_tower.cost)
 				
 				if added_tower.attack_component:
 					added_tower.attack_component.on_tower_placed()
 					
 				added_tower = null
 				can_spawn = false
-			
+			else:
+				remove_tower()
+				
 func is_on_grass() -> bool:
 	var tilemap = level.get_node_or_null("TileMapLayer") as TileMapLayer
 	if tilemap == null or tilemap.tile_set == null:
@@ -115,7 +118,12 @@ func _process(_delta: float) -> void:
 		added_tower.show()
 		# Snap to nearest tile in real-time
 		snap_to_nearest_grass_tile()
-
+		
+		if not is_on_grass() or not money.can_buy(added_tower.cost):
+			added_tower.modulate = Color.RED
+		else:
+			added_tower.modulate = Color.WHITE
+			
 func snap_to_nearest_grass_tile() -> void:
 	var tilemap = level.get_node_or_null("TileMapLayer") as TileMapLayer
 	if tilemap == null:

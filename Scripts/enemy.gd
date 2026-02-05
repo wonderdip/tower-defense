@@ -3,7 +3,6 @@ class_name Enemy
 
 @export var title: String = ""
 @export var speed: float = 60
-@export var knockback_speed: float = 0.5
 @export var weight: float = 40
 @export var range_component: RangeComponent
 @export var health_component: HealthComponent
@@ -39,6 +38,5 @@ func _process(delta):
 	if not health_component.is_taking_damage:
 		path_follow.progress += speed * delta
 	else:
-		var target: float = path_follow.progress_ratio - (weight * delta)
-		target = clamp(target, 0, 1) # stay in 0-1 range
-		path_follow.progress_ratio = lerp(path_follow.progress_ratio, target, knockback_speed * delta)
+		var target: float = path_follow.progress_ratio - (weight / 500) / 2
+		path_follow.progress_ratio = lerpf(path_follow.progress_ratio, target, (speed / weight) * delta)

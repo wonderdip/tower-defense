@@ -22,7 +22,7 @@ parent_node = NodePath("..")
 range_component = NodePath("RangeComponent")
 
 [node name="RangeComponent" parent="AttackComponent" instance=ExtResource("4_gki7q")]
-radius = 200.0
+radius = 60.0
 
 [node name="ShopSprite" type="Sprite2D" parent="."]
 texture = ExtResource("5_csjfd")

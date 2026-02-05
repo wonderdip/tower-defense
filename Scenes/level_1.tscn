@@ -1680,10 +1680,21 @@ collision_mask = 2
 position = Vector2(152, 240)
 shape = SubResource("RectangleShape2D_xfk5q")
 
-[node name="Wave" type="Node2D" parent="." node_paths=PackedStringArray("level_path")]
+[node name="Wave" type="Node2D" parent="." node_paths=PackedStringArray("level_path", "next_wave")]
 script = ExtResource("17_pjppf")
 level_path = NodePath("../LevelPath")
+next_wave = NodePath("../Wave2")
 enemy = ExtResource("2_xfk5q")
 spawn_amount = 1
 spawn_timer = 0.1
+next_wave_timer = 2.0
+starting_wave = true
+metadata/_custom_type_script = "uid://drhr8pk4ryc6l"
+
+[node name="Wave2" type="Node2D" parent="." node_paths=PackedStringArray("level_path")]
+script = ExtResource("17_pjppf")
+level_path = NodePath("../LevelPath")
+enemy = ExtResource("2_xfk5q")
+spawn_amount = 2
+spawn_timer = 0.6
 metadata/_custom_type_script = "uid://drhr8pk4ryc6l"

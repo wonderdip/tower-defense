@@ -6,6 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://dywjivdft4vdg" path="res://Assets/Enemies/Skelly.png" id="4_qe7iu"]
 [ext_resource type="PackedScene" uid="uid://b8r8f4a23xtlr" path="res://Scenes/shadow_component.tscn" id="5_qije5"]
 
+[sub_resource type="Animation" id="Animation_wy1my"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3.8146973e-06, -2.0000038)]
+}
+
 [sub_resource type="Animation" id="Animation_iaory"]
 resource_name = "run"
 length = 0.5333367
@@ -23,21 +38,6 @@ tracks/0/keys = {
 "values": [Vector2(0, -1), Vector2(0, -2), Vector2(0, -3), Vector2(0, -2)]
 }
 
-[sub_resource type="Animation" id="Animation_wy1my"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-3.8146973e-06, -2.0000038)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pntam"]
 _data = {
 &"RESET": SubResource("Animation_wy1my"),
@@ -47,7 +47,7 @@ _data = {
 [node name="Skelly" type="Node2D" node_paths=PackedStringArray("range_component", "health_component")]
 script = ExtResource("1_iaory")
 title = "Skelly"
-speed = 120.0
+speed = 30.0
 range_component = NodePath("RangeComponent")
 health_component = NodePath("HealthComponent")
 
