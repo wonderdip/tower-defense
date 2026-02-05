@@ -26,5 +26,3 @@ radius = 200.0
 
 [node name="ShopSprite" type="Sprite2D" parent="."]
 texture = ExtResource("5_csjfd")
-region_enabled = true
-region_rect = Rect2(0, 0, 48, 48)

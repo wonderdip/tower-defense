@@ -8,19 +8,16 @@
 [node name="Shop" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 408.0
-offset_right = 408.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer"]
-custom_minimum_size = Vector2(72, 288)
-offset_left = 436.0
-offset_right = 512.0
-offset_bottom = 288.0
+offset_left = 308.0
+offset_right = 384.0
+offset_bottom = 216.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
-custom_minimum_size = Vector2(68, 280)
+custom_minimum_size = Vector2(68, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -33,7 +30,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 248)
+custom_minimum_size = Vector2(0, 168)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
@@ -42,16 +39,14 @@ layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="Basic" parent="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row" instance=ExtResource("1_a0mxf")]
+[node name="Basic" parent="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row" node_paths=PackedStringArray("level") instance=ExtResource("1_a0mxf")]
 layout_mode = 2
 tower = ExtResource("2_2shtd")
+level = NodePath("../../../../../../Level1")
 
-[node name="Ranger" parent="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row" instance=ExtResource("1_a0mxf")]
+[node name="Ranger" parent="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row" node_paths=PackedStringArray("level") instance=ExtResource("1_a0mxf")]
 layout_mode = 2
 tower = ExtResource("3_io27d")
+level = NodePath("../../../../../../Level1")
 
 [node name="Level1" parent="." instance=ExtResource("4_fdj0q")]
-position = Vector2(-408, 0)
-
-[connection signal="mouse_entered" from="CanvasLayer/Panel" to="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row/Basic" method="_on_panel_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Panel" to="CanvasLayer/Panel/VBoxContainer/ScrollContainer/Row/Basic" method="_on_panel_mouse_exited"]

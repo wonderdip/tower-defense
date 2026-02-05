@@ -3,6 +3,8 @@ class_name Enemy
 
 @export var title: String = ""
 @export var speed: float = 60
+@export var knockback_speed: float = 0.5
+@export var weight: float = 40
 @export var range_component: RangeComponent
 @export var health_component: HealthComponent
 @export var path: Path2D
@@ -17,6 +19,7 @@ func _ready():
 	
 	# Create PathFollow2D as a child of the path
 	if path:
+		global_position = path.curve.get_point_position(0)
 		path_follow = PathFollow2D.new()
 		path.call_deferred("add_child", path_follow, true)
 		path_follow.loop = false
@@ -27,10 +30,15 @@ func _ready():
 		
 func _on_in_range(area: Area2D):
 	if area.collision_layer & 8 != 0:
-		queue_free()
+		path_follow.queue_free()
 
 func _process(delta):
 	if not path_follow:
 		return
 	# Move along the path
-	path_follow.progress += speed * delta
+	if not health_component.is_taking_damage:
+		path_follow.progress += speed * delta
+	else:
+		var target: float = path_follow.progress_ratio - (weight * delta)
+		target = clamp(target, 0, 1) # stay in 0-1 range
+		path_follow.progress_ratio = lerp(path_follow.progress_ratio, target, knockback_speed * delta)

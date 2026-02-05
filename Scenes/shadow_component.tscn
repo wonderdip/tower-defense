@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8r8f4a23xtlr"]
+
+[ext_resource type="Texture2D" uid="uid://bh4wy4ooxevgo" path="res://Assets/Shadows.png" id="1_2ctsg"]
+[ext_resource type="Script" uid="uid://ddr4tjd4xhsf5" path="res://Scripts/shadow_component.gd" id="1_mbb0f"]
+
+[node name="ShadowComponent" type="Node2D"]
+show_behind_parent = true
+script = ExtResource("1_mbb0f")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_2ctsg")
+region_enabled = true

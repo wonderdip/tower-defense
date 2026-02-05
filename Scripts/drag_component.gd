@@ -13,7 +13,6 @@ func start_drag():
 func end_drag():
 	if parent_node == null:
 		return
-	
 	drag = false
 	
 func _process(delta: float) -> void:
