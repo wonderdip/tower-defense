@@ -1,6 +1,9 @@
 extends Node2D
 class_name Wave
 
+signal enemy_spawned(enemy: Enemy)
+
+
 @export var level_path: Path2D
 @export var next_wave: Wave
 @export var enemy: PackedScene
@@ -18,6 +21,7 @@ func start_wave():
 		var enemy_instance = enemy.instantiate() as Enemy
 		enemy_instance.path = level_path
 		level_path.add_child(enemy_instance)
+		enemy_spawned.emit(enemy_instance)
 		await get_tree().create_timer(spawn_timer).timeout
 		
 	await get_tree().create_timer(next_wave_timer).timeout

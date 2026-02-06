@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://csqiafqoidkyg"]
 
-[ext_resource type="Script" uid="uid://vlm0swu173ej" path="res://Scripts/money.gd" id="1_63yw1"]
+[ext_resource type="Script" path="res://Scripts/money.gd" id="1_63yw1"]
 [ext_resource type="Texture2D" uid="uid://bjtdbcyt24nf" path="res://Assets/FishCoin.png" id="2_1mtjo"]
 
 [sub_resource type="Shader" id="Shader_3ps1r"]
@@ -81,8 +81,8 @@ shader_parameter/Line_Smoothness = 0.0400000019
 shader_parameter/Line_Width = 0.20000000298023
 shader_parameter/Brightness = 3.0
 shader_parameter/Rotation_deg = 35.000005937500006
-shader_parameter/Distortion = 1.3000000142500001
-shader_parameter/Speed = 0.7
+shader_parameter/Distortion = 1.30000001425
+shader_parameter/Speed = 0.3
 shader_parameter/Position = 0.586000027835
 shader_parameter/Position_Min = 0.25
 shader_parameter/Position_Max = 0.5
