@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://0nmwwa211y54"]
+
+[ext_resource type="Texture2D" uid="uid://c73rl42qo711s" path="res://Assets/Heart.png" id="1_1nx07"]
+[ext_resource type="Script" uid="uid://cw33u3eoyougy" path="res://Scripts/health.gd" id="1_aswr4"]
+
+[node name="Health" type="Control"]
+custom_minimum_size = Vector2(48, 16)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 16.0
+script = ExtResource("1_aswr4")
+
+[node name="HealthSprite" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_1nx07")
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -4.0
+offset_right = 56.0
+offset_bottom = 19.0
+text = "200"

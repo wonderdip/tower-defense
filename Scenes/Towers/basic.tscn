@@ -26,3 +26,5 @@ radius = 40.0
 
 [node name="ShopSprite" type="Sprite2D" parent="."]
 texture = ExtResource("5_8orcq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

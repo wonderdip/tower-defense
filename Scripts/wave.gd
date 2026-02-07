@@ -14,7 +14,7 @@ signal enemy_spawned(enemy: Enemy)
 
 func _ready() -> void:
 	if starting_wave:
-		start_wave()
+		call_deferred("start_wave")
 	
 func start_wave():
 	for i in range(spawn_amount):

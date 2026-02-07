@@ -70,46 +70,86 @@ func _input(event: InputEvent) -> void:
 			# Cancel - mouse released over panel
 			remove_tower()
 		else:
-			if is_on_grass() and money.can_buy(added_tower.cost):
-				# Confirm placement
-				added_tower.drag_component.end_drag()
-				added_tower.placed = true
-				money.subtract_money(added_tower.cost)
-				
-				if added_tower.attack_component:
-					added_tower.attack_component.on_tower_placed()
-					
-				added_tower = null
-				can_spawn = false
-			else:
-				remove_tower()
-				
-func is_on_grass() -> bool:
+			if added_tower.type == added_tower.Tower_type.Land:
+				if is_on_terrain("Grass") and money.can_buy(added_tower.cost) and is_on_empty_tile():
+					confirm_placement()
+				else:
+					remove_tower()
+			elif added_tower.type == added_tower.Tower_type.Water:
+				if is_on_terrain("Water") and money.can_buy(added_tower.cost) and is_on_empty_tile():
+					confirm_placement()
+				else:
+					remove_tower()
+
+func confirm_placement():
+		added_tower.drag_component.end_drag()
+		added_tower.placed = true
+		money.subtract_money(added_tower.cost)
+		level.towers.append(added_tower)
+		
+		if added_tower.attack_component:
+			added_tower.attack_component.on_tower_placed()
+			
+		added_tower = null
+		can_spawn = false
+
+func is_on_terrain(terrain: String) -> bool:
 	var tilemap = level.get_node_or_null("TileMapLayer") as TileMapLayer
 	if tilemap == null or tilemap.tile_set == null:
 		return false
 	
-	# Convert the tower's global position to the tilemap's local space
-	var local_pos = tilemap.to_local(added_tower.global_position)
+	var margin := 8
+	var pos := added_tower.global_position
 	
-	# Convert local position to tile coordinates
-	var cell: Vector2i = tilemap.local_to_map(local_pos)
+	var points := [
+		pos,
+		pos + Vector2(-margin, -margin),
+		pos + Vector2(margin, -margin),
+		pos + Vector2(-margin, margin),
+		pos + Vector2(margin, margin),
+	]
 	
-	# Get the tile data at that cell
-	var tile_data: TileData = tilemap.get_cell_tile_data(cell)
-	
-	if tile_data:
-		var terrain = tile_data.get_terrain()
-		return terrain == 1  # Return true if Grass (terrain index 1)
-	
-	return false
+	for p in points:
+		var local_pos = tilemap.to_local(p)
+		var cell: Vector2i = tilemap.local_to_map(local_pos)
+		var tile_data: TileData = tilemap.get_cell_tile_data(cell)
 		
+		if not tile_data:
+			return false
+		
+		match terrain:
+			"Grass":
+				if tile_data.get_terrain() != 1:
+					return false
+			"Water":
+				if tile_data.get_terrain() != 2:
+					return false
+	
+	# Store main cell (for placement)
+	var main_cell = tilemap.local_to_map(tilemap.to_local(pos))
+	added_tower.cell = main_cell
+	
+	return true
+	
+func is_on_empty_tile() -> bool:
+	var min_distance := 32  # one tower width
+	
+	for tower in level.towers:
+		if tower == added_tower:
+			continue
+		
+		if added_tower.global_position.distance_to(tower.global_position) < min_distance:
+			return false
+	
+	return true
+	
 func _on_buy_button_button_down() -> void:
 	if not can_spawn:
 		add_tower()
 
 func _process(_delta: float) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
+	
 	if mouse_pos.x >= 520 and mouse_pos.y >= 0 and added_tower:
 		mouse_over_panel = true
 		added_tower.hide() 
@@ -117,25 +157,13 @@ func _process(_delta: float) -> void:
 		mouse_over_panel = false
 		added_tower.show()
 		# Snap to nearest tile in real-time
-		snap_to_nearest_grass_tile()
 		
-		if not is_on_grass() or not money.can_buy(added_tower.cost):
-			added_tower.modulate = Color.RED
+		if ((added_tower.type == added_tower.Tower_type.Land and not is_on_terrain("Grass"))
+		or (added_tower.type == added_tower.Tower_type.Water and not is_on_terrain("Water")) 
+		or not money.can_buy(added_tower.cost) 
+		or not is_on_empty_tile()):
+			
+			added_tower.modulate = Color.GRAY
 		else:
 			added_tower.modulate = Color.WHITE
 			
-func snap_to_nearest_grass_tile() -> void:
-	var tilemap = level.get_node_or_null("TileMapLayer") as TileMapLayer
-	if tilemap == null:
-		return
-	
-	# Get mouse position in tilemap space
-	var mouse_global = get_global_mouse_position()
-	var local_pos = tilemap.to_local(mouse_global)
-	var cell: Vector2i = tilemap.local_to_map(local_pos)
-	
-	# Snap to tile center
-	var tile_center_local = tilemap.map_to_local(cell)
-	var tile_center_global = tilemap.to_global(tile_center_local)
-	
-	added_tower.global_position = tile_center_global

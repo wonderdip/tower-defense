@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://csqiafqoidkyg"]
 
-[ext_resource type="Script" path="res://Scripts/money.gd" id="1_63yw1"]
+[ext_resource type="Script" uid="uid://vlm0swu173ej" path="res://Scripts/money.gd" id="1_63yw1"]
 [ext_resource type="Texture2D" uid="uid://bjtdbcyt24nf" path="res://Assets/FishCoin.png" id="2_1mtjo"]
 
 [sub_resource type="Shader" id="Shader_3ps1r"]
@@ -90,15 +90,18 @@ shader_parameter/Alpha = 1.0
 shader_parameter/surface = ExtResource("2_1mtjo")
 
 [node name="Money" type="Control"]
-custom_minimum_size = Vector2(92, 0)
+custom_minimum_size = Vector2(56, 16)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 56.0
+offset_bottom = 16.0
 script = ExtResource("1_63yw1")
 starting_cash = 200
 
 [node name="CoinSprite" type="Sprite2D" parent="."]
 modulate = Color(1.269618, 1.269618, 1.269618, 1)
-position = Vector2(16, 16)
+position = Vector2(8, 8)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_1mtjo")
 
 [node name="Glint" type="ColorRect" parent="CoinSprite"]
@@ -108,9 +111,10 @@ offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
 
-[node name="CashLabel" type="Label" parent="CoinSprite"]
+[node name="CashLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 16.0
-offset_top = -12.0
+offset_top = -4.0
 offset_right = 56.0
-offset_bottom = 11.0
+offset_bottom = 20.0
 text = "$200"

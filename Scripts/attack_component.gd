@@ -66,7 +66,7 @@ func try_attack():
 func attack():
 	if target == null:
 		return
-	print("Attacking", target.name)
+	print("Attacking ", target.name)
 	parent_node.modulate = Color.RED
 
 	# Try to find a HealthComponent on the target

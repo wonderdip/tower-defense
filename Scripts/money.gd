@@ -15,7 +15,7 @@ var current_cash: int:
 		if not Engine.is_editor_hint():
 			_on_current_cash_changed()
 
-@onready var cash_label: Label = $CoinSprite/CashLabel
+@onready var cash_label: Label = $CashLabel
 
 func _ready() -> void:
 	current_cash = starting_cash
@@ -34,7 +34,7 @@ func subtract_money(amount: int):
 func _on_starting_cash_changed():
 	if not is_inside_tree():
 		return
-	var label: Label = get_node_or_null("CoinSprite/CashLabel")
+	var label: Label = get_node_or_null("CashLabel")
 	if label:
 		label.text = "$" + str(starting_cash)
 
